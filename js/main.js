@@ -37,8 +37,10 @@
         'star', // 9
     ];
 
-    let word;
+    let word = 0;
     let loc = 0;
+
+
 
     function correctAns() {
         const correct = document.createElement('span');
@@ -54,37 +56,40 @@
         wrong.textContent = '不正解！';
     }
 
-    function judge() {
-        if (word === wordsAns) {
-        // if (word === wordsAns().toUpperCase().trim()) {
-            correctAns();
-        } else {
-            wrongAns();
-        }
-    }
-
     function botQue() {
         // const botChat = document.getElementById('chat-que');
         const spanBot = document.createElement('span');
         spanBot.classList.add('botChat');
         newChat.appendChild(spanBot);
-        word = words.splice(Math.floor(Math.random() * words.length), 1)[0];
-        spanBot.textContent = word;
+        word = Math.floor(Math.random() * words.length);
+        spanBot.textContent = words[word];
         loc = 0;
     }
-
-    btn.addEventListener('click', () => {
-        const span = document.createElement('span');
-        span.classList.add('youChat');
-        newChat.appendChild(span);
-        span.textContent = message.value;
-        input.value = '';
-        input.focus();
-        setTimeout(judge, 500);
+    addEventListener('load', () => {
         setTimeout(botQue, 500);
     });
 
-    end.addEventListener('click', () =>{
+    btn.addEventListener('click', () => {
+        const Mymessage = message.value.trim().toLowerCase();
+        const span = document.createElement('span');
+        span.classList.add('youChat');
+        newChat.appendChild(span);
+        if (/^\s*$/.test(Mymessage)) {
+            span.textContent = '文字を入力してください';
+        } else {
+            span.textContent = Mymessage;
+            input.value = '';
+            input.focus();
+            if (Mymessage === wordsAns[word]) {
+                correctAns();
+            } else {
+                wrongAns();
+            }
+            setTimeout(botQue, 500);
+        }
+    });
+
+    end.addEventListener('click', () => {
         const endCSS = document.createElement('span');
         endCSS.classList.add('endChat')
         newChat.appendChild(endCSS)
@@ -92,4 +97,5 @@
         input.value = '';
         input.focus();
     });
+    
 }
