@@ -77,7 +77,7 @@
         if (/^\s*$/.test(Mymessage)) {
             span.textContent = '文字を入力してください';
         } else {
-            span.textContent = Mymessage;
+            span.textContent = message.value;
             input.value = '';
             input.focus();
             if (Mymessage === wordsAns[word]) {
