@@ -24,6 +24,79 @@ h1 {
 }
 
 
+
+.openbtn{
+    display: flex;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 10px;
+    right: 10px;
+    align-items: center;
+}
+
+.openbtn span{
+    display: inline-block;
+    transition: all .4s;
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+	background: #000000;
+  	width: 45%;
+    align-items: center;
+  }
+
+.openbtn span:nth-of-type(1) {
+	top:18px;	
+}
+
+.openbtn span:nth-of-type(2) {
+	top:26px;
+}
+
+.openbtn span:nth-of-type(3) {
+	top:34px;
+}
+
+.openbtn.active span:nth-of-type(1) {
+    top: 21px;
+    left: 21px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+	opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3){
+    top: 33px;
+    left: 21px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
+}
+
+#menu{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+#menu li{
+    position: absolute;
+    cursor: pointer;
+    border-bottom:1px solid;
+}
+
+#menu li:hover {
+    color: red;
+}
+
+
 #chat-ans {
     display: flex;
     flex-direction: column;
@@ -31,7 +104,7 @@ h1 {
     padding-bottom: 200px;
 }
 
-.botChat, .correctChat, .wrongChat{
+.botChat, .correctChat, .wrongChat, .firstChat{
     list-style-type: none;
     font-size: 24px;
     background: greenyellow;
@@ -57,11 +130,13 @@ h1 {
     font-size: 24px;
     background: white;
     margin-top: 40px;
+    margin-left: auto;
     margin-right: 30px;
     padding: 0 20px;
     border: solid 1.5px black;
     border-radius: 16px;
     box-sizing: border-box;
+    text-align: right;
 }
 
 /* #end-chat {
@@ -121,3 +196,49 @@ h1 {
     color: #fff;
     cursor: pointer;
 }
+
+#mask {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#menu {
+    width: 300px;
+    padding: 20px;
+    border-radius: 4px;
+    position: absolute;
+    align-items: center;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transition: transform, 0.4s;
+    z-index: 2;
+    list-style: none;
+    font-size: 30px;
+    position: fixed;
+}
+
+#image.hidden {
+    display: none;
+}
+
+#close.hidden {
+    display: none;
+}
+
+#mask.hidden {
+    display: none;
+}
+
+#delete.hidden {
+    display: none;
+}
+
+/* #menu.hidden {
+    transform: translate(0, -1000px);
+} */
