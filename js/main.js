@@ -87,13 +87,8 @@
         histories.push(history);
         saveHistories();
     }
-    let count = 0;
+  
     addEventListener('load', () => {
-        if (count >= 1) {
-            console.log('成功');
-        } else {
-            console.log('失敗');
-        }
         setTimeout(botQue, 500);
         if (localStorage.getItem('histories') !== null) {
             histories = JSON.parse(localStorage.getItem('histories'));
@@ -104,8 +99,6 @@
     });
 
     btn.addEventListener('click', () => {
-        count++;
-        console.log(count);
         const Mymessage = message.value.trim().toLowerCase();
         const span = document.createElement('span');
         span.classList.add('youChat');
@@ -127,7 +120,7 @@
             histories.push(history);
             saveHistories();
         } else {
-            span.textContent = Mymessage;
+            span.textContent = message.value;
             input.value = '';
             input.focus();
             histories.push(history);
