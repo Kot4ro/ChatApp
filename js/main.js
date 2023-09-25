@@ -7,6 +7,9 @@
     const menu = document.getElementById('menu');
     const mask = document.getElementById('mask');
     const remove = document.getElementById('delete');
+    const menuLast = document.getElementById('menu-last');
+    const no = document.getElementById('no');
+    const yes = document.getElementById('yes');
     const you = document.getElementById('you');
     const end = document.getElementById('end');
     const li = document.createElement('li');
@@ -41,7 +44,6 @@
     ];
 
     let word = 0;
-    let loc = 0;
 
     let histories;
     let JsonMymessage;
@@ -77,7 +79,6 @@
         newChat.appendChild(spanBot);
         word = Math.floor(Math.random() * words.length);
         spanBot.textContent = words[word];
-        loc = 0;
         const history = {
             id: Date.now(),
             chat: words[word],
@@ -86,8 +87,13 @@
         histories.push(history);
         saveHistories();
     }
-
+    let count = 0;
     addEventListener('load', () => {
+        if (count >= 1) {
+            console.log('成功');
+        } else {
+            console.log('失敗');
+        }
         setTimeout(botQue, 500);
         if (localStorage.getItem('histories') !== null) {
             histories = JSON.parse(localStorage.getItem('histories'));
@@ -95,11 +101,11 @@
             const JsonMymessage = JSON.stringify(history);
         }
         renderHistories();
-    }, {once: true});
+    });
 
     btn.addEventListener('click', () => {
-        loc++;
-        console.log(loc);
+        count++;
+        console.log(count);
         const Mymessage = message.value.trim().toLowerCase();
         const span = document.createElement('span');
         span.classList.add('youChat');
@@ -149,8 +155,8 @@
             }
             setTimeout(botQue, 500);
         }
-        console.table(histories);
-        console.table(JsonMymessage);
+        // console.table(histories);
+        // console.table(JsonMymessage);
     });
 
     end.addEventListener('click', () => {
@@ -185,10 +191,10 @@
                 newChat.appendChild(wrong);
             } else if (history.class === 'endChat') {
                 const endCSS = document.createElement('span');
-                endCSS.classList.add('endChat')
+                endCSS.classList.add('endChat');
                 endCSS.textContent = '終了';
                 newChat.appendChild(endCSS)
-            } else if (history.class === 'botChat'){
+            } else if (history.class === 'botChat') {
                 const spanBot = document.createElement('span');
                 spanBot.classList.add('botChat');
                 spanBot.textContent = history.chat;
@@ -206,16 +212,27 @@
         menu.classList.add('hidden');
         mask.classList.add('hidden');
         remove.classList.add('hidden');
+        menuLast.classList.add('hidden');
         openbtn.classList.remove('active');
     });
 
     remove.addEventListener('click', () => {
-        console.log('削除ボタン押せた');
-        if (confirm('削除しますか？')) {
-            localStorage.clear();
-            span.remove();
-        }
+        menuLast.classList.remove('hidden');
     });
+
+    no.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        mask.classList.add('hidden');
+        remove.classList.add('hidden');
+        menuLast.classList.add('hidden');
+        openbtn.classList.remove('active');
+    });
+
+    yes.addEventListener('click', () => {
+        localStorage.clear();
+        newChat.innerHTML = '';
+        alert("command+Rを押してください");
+    })
 
     openbtn.addEventListener('click', () => {
         menu.classList.remove('hidden');
