@@ -41,6 +41,6 @@ function getFromClient(request, response) {
         default:
             response.writeHead(200, { 'Content-Type': 'text/plain' });
             response.end();
-            break; 
+            break;
     }
 }
